@@ -1,4 +1,3 @@
-sudo: required
 language: generic
 services:
   - docker
@@ -10,10 +9,10 @@ script:
   - docker run -e CI=true willykind/react-test npm test
 
 after_success:
-  - docker build -t willykind/multi-client -f ./client
-  - docker build -t willykind/multi-nginx -f ./nginx
-  - docker build -t willykind/multi-server -f ./server
-  - docker build -t willykind/multi-worker -f ./worker
+  - docker build -t willykind/multi-client ./client
+  - docker build -t willykind/multi-nginx ./nginx
+  - docker build -t willykind/multi-server ./server
+  - docker build -t willykind/multi-worker ./worker
 
   # Log in to Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
